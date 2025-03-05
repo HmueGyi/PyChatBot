@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PyChatbot</title>
+  <link rel="icon" type="image/png" href="./assets/chatbot.png">
+  <link rel="icon" type="image/x-icon" href="./assets/chatbot.png">
+  <!-- Icon -->
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="./connect4/connect4.css" />
+  <script src="./rive.min.js"></script>
+</head>
+
+<body>
+  <div class="body-container">
+    <div class="logo-section">
+      <h2 class="title">PyChatbot</h2>
+    </div>
+    <div id="chat-container">
+      <canvas id="chatbot" width="500" height="350"></canvas>
+      <div class="blink-box" id="blinkBox">
+        <!-- <div class="blink-table" id="blinkTable" hidden>
+          <table id="table">
+            <caption>Meeting Table</caption>
+            <tr>
+              <th>Title</th>
+              <th>Time</th>
+              <th>Day</th>
+              <th>Date</th>
+            </tr>
+          </table>
+        </div> -->
+        <!-- Game container to align elements -->
+        <div id="gameBox" hidden>
+          <p id="turn-indicator">Your Turn</p>
+          <div id="game-container">
+            <div id="board"></div>
+
+            <!-- Buttons placed below the board -->
+            <div id="button-container">
+              <button class="try-btn" onclick="resetGame()">Try Again</button>
+              <button class="exit-btn" id="exitBtn">Exit</button>
+            </div>
+          </div>
+          <script src="./connect4/connect4.js"></script>
+        </div>
+      </div>
+      <div id="chatbox" hidden>
+        <div id="messages"></div>
+        <div id="input-area">
+          <input type="text" id="userInput" placeholder="Type your message..." />
+          <button class="send-btn" id="sendBtn">Send</button>
+        </div>
+      </div>
+    </div>
+    <div class="navbar-section">
+      <!-- <button class="record-btn" onclick="startSpeechRecognition()">🎤</button> -->
+      <div style="height: 45vh;width: 200px;"></div>
+      <div class="menu">
+        <ul>
+          <li class='link actived' id="voiceModeBtn" onclick="onMenuClicked(1)">
+            <span class='link-icon'><ion-icon name="mic-outline"></ion-icon></span>
+            <span class='link-title'>Voice</span>
+          </li>
+          <li class='link' id="textModeBtn" onclick="onMenuClicked(2)">
+            <span class='link-icon'><ion-icon name="text-outline"></ion-icon></span>
+            <span class='link-title'>Text</span>
+          </li>
+        </ul>
+      </div>
+      <div class="floating-btn"><button class="record-btn" id="recordBtn"><ion-icon
+            name="mic-outline"></ion-icon></button></div>
+    </div>
+  </div>
+  <p class="sponser">Powered by <span>FCS@UCS(PATHEIN)</span></p>
+  <script src="script.js"></script>
+</body>
+
+</html>

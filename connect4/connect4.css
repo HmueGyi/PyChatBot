@@ -1,0 +1,105 @@
+:root{
+  --primary-color: #308af4;
+  --secondary-color: #719bcc;
+}
+
+#board {
+  height: 260px;
+  width: 310px;
+  background-color: #0f2027;
+  border: 6px solid var(--secondary-color);
+  margin: 0px auto 0px auto;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 4px;
+  border-radius: 8px;
+}
+
+#turn-indicator{
+  margin-top: -30px;
+  font-size: 18px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  text-align: center;
+}
+
+.tile {
+  height: 34px;
+  width: 34px;
+  margin: 2px;
+  background-color: transparent;
+  border-radius: 50%;
+  border: 3px solid gainsboro;
+  transition: transform 0.3s ease-in-out;
+}
+#title,
+#turn-indicator,
+#winner {
+  text-align: center;
+}
+.tile:hover {
+  transform: scale(1.1);
+}
+.red-piece {
+  background: linear-gradient(135deg, #ff6ec7, #6a82fb);
+  /*box-shadow: 0px 0px 5px rgba(255,110,199,0.6);
+    /* animation: dropPiece 0.7s cubic-bezier(0.25, 1, 0.5, 1); */
+}
+
+.yellow-piece {
+  background: linear-gradient(135deg, #ffdd00, #ff4300);
+  /*box-shadow: 0px 0px 5px rgba(255,221,0,0.6);
+    /* animation: dropPiece 0.7s cubic-bezier(0.25, 1, 0.5, 1); */
+}
+
+@keyframes dropPiece {
+  0% {
+    transform: translateY(-200px) rotate(-20deg) scale(0.8);
+    opacity: 0;
+  }
+  20% {
+    transform: translateY(-100px) rotate(10deg) scale(1);
+    opacity: 0.7;
+  }
+  40% {
+    transform: translateY(-50px) rotate(-5deg);
+    opacity: 1;
+  }
+  60% {
+    transform: translateY(10px) rotate(3deg);
+  }
+  75% {
+    transform: translateY(-5px) rotate(-1deg);
+  }
+  90% {
+    transform: translateY(2px) rotate(0.5deg);
+  }
+  100% {
+    transform: translateY(0) rotate(0);
+  }
+}
+
+#button-container {
+  display: flex;
+  justify-content: center; /* Center buttons */
+  align-items: center;
+  gap: 130px; /* Space between buttons */
+  margin-top: 5px;
+}
+button {
+  padding: 10px 25px; /* Bigger buttons */
+  font-size: 14px;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+.try-btn {
+  background-color: var(--secondary-color);
+  color: white;
+}
+
+.exit-btn {
+  background-color: #ff5500;
+  color: white;
+}

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <div id="typedtext"></div>
+    <button id="recordBtn">Speak</button>
+    <script>
+        // set up text to print, each item in array is new line
+
+        // var aText = new Array(
+        //     "Becoming a full-stack developer is a rewarding journey that involves mastering both front-end and back-end technologies. Below is a step-by-step guide to help you get started:Becoming a full-stack developer is a rewarding journey that involves mastering both front-end and back-end technologies. Below is a step-by-step guide to help you get started:Becoming a full-stack developer is a rewarding journey that involves mastering both front-end and back-end technologies. Below is a step-by-step guide to help you get started:Becoming a full-stack developer is a rewarding journey that involves mastering both front-end and back-end technologies. Below is a step-by-step guide to help you get started:Becoming a full-stack developer is a rewarding journey that involves mastering both front-end and back-end technologies. Below is a step-by-step guide to help you get started:Becoming a full-stack developer is a rewarding journey that involves mastering both front-end and back-end technologies. Below is a step-by-step guide to help you get started:Becoming a full-stack developer is a rewarding journey that involves mastering both front-end and back-end technologies. Below is a step-by-step guide to help you get started:Becoming a full-stack developer is a rewarding journey that involves mastering both front-end and back-end technologies. Below is a step-by-step guide to help you get started:Becoming a full-stack developer is a rewarding journey that involves mastering both front-end and back-end technologies. Below is a step-by-step guide to help you get started:Becoming a full-stack developer is a rewarding journey that involves mastering both front-end and back-end technologies. Below is a step-by-step guide to help you get started:Becoming a full-stack developer is a rewarding journey that involves mastering both front-end and back-end technologies. Below is a step-by-step guide to help you get started:Becoming a full-stack developer is a rewarding journey that involves mastering both front-end and back-end technologies. Below is a step-by-step guide to help you get started:Becoming a full-stack developer is a rewarding journey that involves mastering both front-end and back-end technologies. Below is a step-by-step guide to help you get started:"
+        // );
+        // var iSpeed = 50; // time delay of print out
+        // var iIndex = 0; // start printing array at this posision
+        // var iArrLength = aText[0].length; // the length of the text array
+        // var iScrollAt = 20; // start scrolling up at this many lines
+
+        // var iTextPos = 0; // initialise text position
+        // var sContents = ''; // initialise contents variable
+        // var iRow; // initialise current row
+
+        // function typewriter() {
+        //     sContents = ' ';
+        //     iRow = Math.max(0, iIndex - iScrollAt);
+        //     var destination = document.getElementById("typedtext");
+
+        //     while (iRow < iIndex) {
+        //         sContents += aText[iRow++] + '<br />';
+        //     }
+        //     destination.innerHTML = sContents + aText[iIndex].substring(0, iTextPos) + "_";
+        //     if (iTextPos++ == iArrLength) {
+        //         iTextPos = 0;
+        //         iIndex++;
+        //         if (iIndex != aText.length) {
+        //             iArrLength = aText[iIndex].length;
+        //             setTimeout("typewriter()", 500);
+        //         }
+        //     } else {
+        //         setTimeout("typewriter()", iSpeed);
+        //     }
+        // }
+
+
+        // typewriter();
+        var aText = [
+            "Becoming a full-stack developer is a rewarding journey that involves mastering both front-end and back-end technologies. Below is a step-by-step guide to help you get started."
+        ];
+        var iSpeed = 50; // time delay of print out (adjust as needed)
+        var iIndex = 0; // start printing array at this position
+        var iScrollAt = 20; // start scrolling up at this many lines
+
+        var iTextPos = 0; // initialise text position
+        var sContents = ''; // initialise contents variable
+        var iRow; // initialise current row
+        var words = aText[0].split(" "); // Split text into words
+        var iWordIndex = 0;
+
+        function typewriter() {
+            var destination = document.getElementById("typedtext");
+
+            if (iWordIndex < words.length) {
+                sContents += words[iWordIndex] + " ";
+                destination.innerHTML = sContents + "_"; // Cursor effect
+                iWordIndex++;
+                setTimeout(typewriter, iSpeed);
+            } else {
+                destination.innerHTML = sContents; // Remove cursor when done
+            }
+        }
+
+        typewriter();
+
+        const recordBtn = document.getElementById("recordBtn");
+        recordBtn.addEventListener("click", () => {
+            const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            recognition.lang = "en-US";
+            recognition.continuous = true;
+            recognition.interimResults = true;
+
+            recognition.onresult = (event) => {
+                let transcript = "";
+                for (let i = event.resultIndex; i < event.results.length; i++) {
+                    transcript += event.results[i][0].transcript;
+                }
+                console.log("Recognized text:", transcript);
+            };
+
+            recognition.start();
+        })
+
+    </script>
+</body>
+
+</html>
