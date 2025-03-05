@@ -56,17 +56,18 @@ const r = new rive.Rive({
       }
     }
 
-   async function sendMessage() {
+    async function sendMessage() {
+      window.speechSynthesis.cancel();
       const message = userInput.value.trim();
       if (!message) return;
-    
+
       // Display user message
       addMessage("user", message);
       userInput.value = ""; // Clear the input field
-    
+
       // Set the focus back to the input field for the next message
       userInput.focus();
-    
+
       try {
         // Send message to the backend
         const response = await fetch("http://127.0.0.1:5000/chat", {
@@ -76,7 +77,7 @@ const r = new rive.Rive({
         });
         const data = await response.json();
         console.log(data);
-    
+
         if (data.mode == "game") {
           riveBoolean.setFalse();
           riveBoolean.setTrue(isBlink);
@@ -85,6 +86,15 @@ const r = new rive.Rive({
           setTimeout(() => {
             gameBox.removeAttribute("hidden");
           }, 1000);
+        } else if (data.mode == "code") {
+          _currentIndex = 2;
+          textModeBtn.classList.add("actived");
+          voiceModeBtn.classList.remove("actived");
+          chatbot.setAttribute("hidden", "true");
+          chatbox.removeAttribute("hidden");
+          recordBtn.setAttribute("hidden", "true");
+          riveBoolean.setFalse();
+          addMessage("PyChat", formatResponse(data.response));
         } else {
           addMessage("PyChat", formatResponse(data.response));
           speakText(data);
@@ -102,16 +112,16 @@ const r = new rive.Rive({
         isLoading = false;
         console.log("API call completed.");
       }
-    
+
       // Keep the chat scrolled to the bottom after each new message
       messages.scrollTop = messages.scrollHeight;
     }
-    
+
     // Show the response in document
     function addMessage(sender, text) {
       const messageDiv = document.createElement("div");
       messageDiv.className = sender;
-    
+
       if (sender === "user") {
         // Replace newline characters with <br> for line breaks in HTML
         messageDiv.innerHTML = text.replace(/\n/g, "<br>");
@@ -119,14 +129,14 @@ const r = new rive.Rive({
       } else {
         messageDiv.setAttribute("id", "typedtext");
         messages.appendChild(messageDiv);
-    
+
         // Typewriter animation
         let aText = [text];
         let iSpeed = 80; // time delay of print out (adjust as needed)
         let sContents = "";
         let words = aText[0].split(" "); // Split text into words
         let iWordIndex = 0;
-    
+
         function typewriter() {
           if (iWordIndex < words.length) {
             sContents += words[iWordIndex] + " ";
@@ -141,29 +151,30 @@ const r = new rive.Rive({
             messages.scrollTop = messages.scrollHeight;
           }
         }
-    
+
         setTimeout(typewriter, 1000);
       }
     }
-    
-    
+
+
 
     // Format response
-function formatResponse(response) {
-  // Replace newline characters with <br> for line breaks in HTML
-  return response.replace(/\n/g, "<br>");
-}
- 
-userInput.addEventListener("keydown", (event) => {
-  if (event.key === "Enter") {
-    event.preventDefault();  // Prevent the default "Enter" behavior (e.g., creating a new line)
-    sendMessage();  // Call the sendMessage function when Enter is pressed
-  }
-});
+    function formatResponse(response) {
+      // Replace newline characters with <br> for line breaks in HTML
+      return response.replace(/\n/g, "<br>");
+    }
+
+    userInput.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        event.preventDefault();  // Prevent the default "Enter" behavior (e.g., creating a new line)
+        sendMessage();  // Call the sendMessage function when Enter is pressed
+      }
+    });
 
 
     // STT
-function speechRecognition() {
+    function speechRecognition() {
+      window.speechSynthesis.cancel();
       const recognition = new (window.SpeechRecognition ||
         window.webkitSpeechRecognition)();
       recognition.lang = "en-US";
@@ -214,14 +225,14 @@ function speechRecognition() {
 
       const responseText = data.response;
 
-  // Count the number of words in the response
-  const wordCount = responseText.split(/\s+/).length;
+      // Count the number of words in the response
+      const wordCount = responseText.split(/\s+/).length;
 
-  // Check if the word count exceeds 100
-  if (wordCount > 100) {
-    console.log("Response too long for speech synthesis.");
-    return; // Skip speech synthesis if the response is too long
-  }
+      // // Check if the word count exceeds 100
+      // if (wordCount > 100) {
+      //   console.log("Response too long for speech synthesis.");
+      //   return; // Skip speech synthesis if the response is too long
+      // }
 
       const utterance = new SpeechSynthesisUtterance(data.response);
       const voices = synth.getVoices();

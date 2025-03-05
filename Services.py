@@ -82,13 +82,15 @@ initialize_reminder_table()
 
 
 def ask_openai(question):
+    isCodePrompt = re.search(r'Write * program|write code|code in|write a|write a|program in', question)
     response = openai.ChatCompletion.create(
         model="gpt-4o-mini",  # Use the latest model available to you
         messages=[
             {"role": "user", "content": question}
         ]
     )
-    return response['choices'][0]['message']['content'].strip()
+    mode = "code" if (isCodePrompt) else 'text'
+    return response['choices'][0]['message']['content'].strip(), mode
 
 def chatbot_response(user_input, user_id="default"):
     user_input = user_input.lower().strip()
@@ -353,7 +355,7 @@ def chatbot_response(user_input, user_id="default"):
             expression = match.group(1).strip().replace('=', '')
             return calculate_expression(expression), mode  # Handle calculations properly
 
-    other_response = ask_openai(user_input)
+    other_response, mode = ask_openai(user_input)
     return other_response, mode
 
 def save_meeting(title, date, time):
