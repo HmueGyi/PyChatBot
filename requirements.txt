@@ -1,0 +1,9 @@
+speechrecognition
+pyttsx3
+Flask
+requests
+pytz
+flask-cors
+sympy
+openai
+python-dotenv
