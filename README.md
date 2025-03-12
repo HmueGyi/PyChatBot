@@ -1,6 +1,6 @@
 ﻿# PyChatBot
 
-![PyChatBot](https://your-image-url.com)  
+![PyChatBot](https://pychatbot.com)  
 _A smart chatbot powered by NLP and AI_
 
 ## 🚀 Features
