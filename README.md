@@ -90,6 +90,6 @@ This project is licensed under the MIT License.
 
 ---
 
-_💡 Built with ❤️ by PyChatBot Team. my frined :(https://github.com/yaachay)_
+_💡 Built with ❤️ by PyChatBot Team. my friend :(https://github.com/yaachay)_
 
 
