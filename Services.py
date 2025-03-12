@@ -21,6 +21,7 @@ import openai
 import pyttsx3 
 from dotenv import load_dotenv
 from datetime import datetime, timedelta
+import os
 
 app = Flask(__name__)
 CORS(app)
