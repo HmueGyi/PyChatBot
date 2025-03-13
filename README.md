@@ -55,7 +55,7 @@ python Services.py
 ### **Example Queries**
 - "What’s the weather in Pathein?"
 - "Remind me to call John at 3:30 PM."
-- "Who is the president of Myanmar?"
+- "Who is the president of USA?"
 - "Tell me a joke!"
 - "I am happy today"
 - "Tell me the time in japan"
