@@ -86,7 +86,7 @@ This project is licensed under the MIT License.
 ## 📧 Contact
 - Developer: **Hmue Gyi and Yaachay**
 - Email: hmuesett2002@gmail.com
-- GitHub: [GitHub Profile](https://github.com/HmueGyi)
+- GitHub: [Hmue_Gyi](https://github.com/HmueGyi)
 
 ---
 
