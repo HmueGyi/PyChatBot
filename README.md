@@ -59,6 +59,7 @@ python Services.py
 - "Tell me a joke!"
 - "I am happy today"
 - "Tell me the time in japan"
+- "I want to play game"
 - "Do i have meetings" that (need to be insert data on database) eg.plan meeting.first you need to add meeting name and then you need to add meeting date and time.
 
 ---
